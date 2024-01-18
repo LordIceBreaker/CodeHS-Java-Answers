@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+
+public class Roster {
+    
+    public static ArrayList<Student> classList = new ArrayList<Student>();
+    
+    
+    public static void addStudent(String name, int grade)
+    {
+        Student newStud = new Student(name, grade);
+        
+        classList.add(newStud);
+        
+    }
+    
+    /*Don't change the code in this method!
+    This method will print out all the Student names in the classList Array
+    */
+    public static String printClassList()
+    {
+        String names = "";
+        for(Student name: classList)
+        {
+            names+= name.getName() + "\n";
+        }
+        return "Student Class List:\n" + names;
+    }
+    
+}
