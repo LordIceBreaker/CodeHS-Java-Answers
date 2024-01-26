@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class DataPurge
+{
+    public static void removeDuplicates(ArrayList<String> names)
+    {
+        for (int i = 0; i < names.size(); i++)
+        {
+            for (int j = i + 1; j < names.size(); j++)
+            {
+                if (names.get(i).equals(names.get(j)))
+                {
+                    System.out.println("Duplicate name " + names.get(i) + " has been removed");
+                    names.remove(j);
+                    j++;
+                }
+            }           
+        }
+    }
+
+    public static void removeName(ArrayList<String> mem, String name)
+    {
+        for (int i = 0; i < mem.size(); i++)
+        {
+            if (mem.get(i).contains(name))
+            {
+                System.out.println("Name removed: " + name);
+                mem.remove(i);
+            }
+        }
+    }
+
+    public static boolean correctlyFormatted (ArrayList<String> names)
+    {
+        boolean correctFormat = false;
+        for (int i = 0; i < names.size(); i++)
+        {
+            if (names.get(i).substring(0, 1).equals(names.get(i).substring(0, 1).toUpperCase()) && names.get(i).equals(" "))
+            {
+                correctFormat = true;
+            }
+        }
+        return correctFormat;
+    }
+}
