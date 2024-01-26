@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class DataPurge
 {
+    //Removes any duplicates automatically while leaving one copy (no return)
     public static void removeDuplicates(ArrayList<String> names)
     {
         for (int i = 0; i < names.size(); i++)
@@ -12,6 +13,7 @@ public class DataPurge
                 if (names.get(i).equals(names.get(j)))
                 {
                     System.out.println("Duplicate name " + names.get(i) + " has been removed");
+                    
                     names.remove(j);
                     j++;
                 }
@@ -19,7 +21,8 @@ public class DataPurge
         }
     }
 
-    public static void removeName(ArrayList<String> mem, String name)
+    //Removes a specific name provided (returns an ArrayList)
+    public static ArrayList<String> removeName(ArrayList<String> mem, String name)
     {
         for (int i = 0; i < mem.size(); i++)
         {
@@ -29,16 +32,23 @@ public class DataPurge
                 mem.remove(i);
             }
         }
+        return mem;
     }
 
+    //Checks if full name is correctly formatted (returns a boolean)
     public static boolean correctlyFormatted (ArrayList<String> names)
     {
         boolean correctFormat = false;
+
         for (int i = 0; i < names.size(); i++)
         {
-            if (names.get(i).substring(0, 1).equals(names.get(i).substring(0, 1).toUpperCase()) && names.get(i).equals(" "))
+            if (names.get(i).substring(0, 1).equals(names.get(i).substring(0, 1).toUpperCase())) //Checks if first letter is uppercase
             {
-                correctFormat = true;
+                if (names.get(i).equals(" ")) //Checks if word has a space
+                {
+                    correctFormat = true;
+                }
+                
             }
         }
         return correctFormat;
