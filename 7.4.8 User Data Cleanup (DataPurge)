@@ -12,7 +12,7 @@ public class DataPurge
             {
                 if (names.get(i).equals(names.get(j)))
                 {
-                    System.out.println("Duplicate name " + names.get(i) + " has been removed");
+                    System.out.println("Duplicate name " + names.get(i) + " has been removed"); //DON'T DELETE LINE
                     
                     names.remove(j);
                     j++;
@@ -22,14 +22,13 @@ public class DataPurge
     }
 
     //Removes a specific name provided (returns an ArrayList)
-    public static ArrayList<String> removeName(ArrayList<String> mem, String name)
-    {
-        for (int i = 0; i < mem.size(); i++)
-        {
-            if (mem.get(i).contains(name))
-            {
-                System.out.println("Name removed: " + name);
+    public static ArrayList<String> removeName(ArrayList<String> mem, String name) {
+        for (int i = 0; i < mem.size(); i++) {
+
+            if (mem.get(i).contains(name)) {
+                System.out.println("Name removed: " + name); //DON'T DELETE LINE
                 mem.remove(i);
+                i--;
             }
         }
         return mem;
@@ -38,19 +37,19 @@ public class DataPurge
     //Checks if full name is correctly formatted (returns a boolean)
     public static boolean correctlyFormatted (ArrayList<String> names)
     {
-        boolean correctFormat = false;
+        for (int i = 0; i < names.size(); i++) {
 
-        for (int i = 0; i < names.size(); i++)
-        {
-            if (names.get(i).substring(0, 1).equals(names.get(i).substring(0, 1).toUpperCase())) //Checks if first letter is uppercase
-            {
-                if (names.get(i).equals(" ")) //Checks if word has a space
-                {
-                    correctFormat = true;
-                }
-                
+            if (!names.get(i).substring(0, 1).equals(names.get(i).substring(0, 1).toUpperCase())) {
+                return false;             
+            }
+            else if (!names.get(i).contains(" ")) {
+                return false;
+            }
+            else if (!names.get(i).split(" ")[1].substring(0, 1)
+                        .equals(names.get(i).split(" ")[1].substring(0, 1).toUpperCase())) {
+                return false;
             }
         }
-        return correctFormat;
+        return true;
     }
 }
