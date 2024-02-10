@@ -1,0 +1,67 @@
+public class Game {
+    
+    private Deck deck;
+    private Player[] players;
+    
+    public Game(int numPlayers) {
+        deck = new Deck();
+        players = new Player[numPlayers];
+        for (int i = 0; i < players.length; i++) {
+            players[i] = new Player(i == 0); // the first player is the dealer
+        }
+    }
+    
+    // used for grader only, do not modify
+    public Game (Deck deck, Player[] players) {
+        this.deck = deck;
+        this.players = players;
+    }
+    
+    public void playGame() {
+        // deal one card to every player starting with the dealer
+        for (int i = 0; i < players.length; i++) {
+            players[i].addCard(deck.dealCard());
+        }
+        // deal a second card to every player starting with the dealer
+        for (int i = 0; i < players.length; i++) {
+            players[i].addCard(deck.dealCard());
+        }
+        // loop through all the players starting with the dealer
+        // and deal additional cards until that player's hit method returns false
+        for (int i = 0; i < players.length; i++) {
+            Player p = players[i];
+            while (p.hit(players[0].getFaceUpCard())) {
+                p.addCard(deck.dealCard());
+            }
+        }
+        // loop through all the players except the dealer
+        // and set each player's outcome to either "Win", "Tie", or "Lose" according to the rules
+        for (int i = 1; i < players.length; i++) {
+            Player p = players[i];
+            Player d = players[0];
+            if (p.getHandValue() > 21) {
+                p.setOutcome("Lose"); // the player busts
+            } else if (d.getHandValue() > 21) {
+                p.setOutcome("Win"); // the dealer busts
+            } else if (p.getHandValue() > d.getHandValue()) {
+                p.setOutcome("Win"); // the player has a higher hand value than the dealer
+            } else if (p.getHandValue() == d.getHandValue()) {
+                p.setOutcome("Tie"); // the player and the dealer have the same hand value
+            } else {
+                p.setOutcome("Lose"); // the player has a lower hand value than the dealer
+            }
+        }
+        // print out the dealer
+        System.out.println(players[0]);
+        // loop through the other players and print them out in order
+        // with those that won followed by players that tied, then the players that lost
+        for (String o : new String[] {"Win", "Tie", "Lose"}) {
+            for (int i = 1; i < players.length; i++) {
+                Player p = players[i];
+                if (p.getOutcome().equals(o)) {
+                    System.out.println(p);
+                }
+            }
+        }
+    }
+}
