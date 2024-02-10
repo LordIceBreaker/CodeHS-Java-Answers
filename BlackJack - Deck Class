@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Deck 
+{
+    private ArrayList<Card> deck;
+    
+    public Deck() {
+        deck = new ArrayList<>(); 
+        createDeck();
+        shuffleDeck();
+    }
+    
+    // used for grader, do not modify
+    public Deck(ArrayList<Card> cards) {
+        this.deck = cards;
+    }
+    
+    // Copy over your methods from the Card Game assignment
+    private void createDeck() {
+        for (int i = 0; i < 52; i++) {
+            deck.add(new Card(i));
+        }
+    }
+    
+    public void shuffleDeck() {
+        Collections.shuffle(deck);
+    }
+    
+    public Card dealCard() {
+        if (deck.isEmpty()) {
+            return null;
+        } else {
+            return deck.remove(0);
+        }
+    }
+    
+    public int getDeckSize() {
+        return deck.size();
+    }
+    
+    public void show() {
+        for (int i = 0; i < deck.size(); i++) {
+            if (i != 0 && i % 13 == 0) {
+                System.out.println();
+            }
+            System.out.print(deck.get(i) + " ");
+        }
+        System.out.println();
+    }
+    
+    
+}
