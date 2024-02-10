@@ -1,0 +1,147 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Player {
+    // instance variables
+    private ArrayList<Card> hand; // the player's cards
+    private int handValue; // the total value of the hand
+    private Card faceUpCard; // the first card received
+    private String outcome; // the result of the game ("Win", "Tie", or "Lose")
+    private boolean isDealer; // true if the player is the dealer
+    
+    // constructor
+    public Player(boolean isDealer) {
+        hand = new ArrayList<Card>();
+        handValue = 0;
+        faceUpCard = null;
+        outcome = "";
+        this.isDealer = isDealer;
+    }
+    
+    // add a card to the hand and update the hand value and face up card
+    public void addCard(Card c) {
+        hand.add(c);
+        handValue += c.getValue();
+        if (faceUpCard == null) {
+            faceUpCard = c;
+        }
+        sortHand();
+        checkAce();
+    }
+    
+    // sort the hand by card value using the compareTo method
+    private void sortHand() {
+        for (int i = 0; i < hand.size() - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < hand.size(); j++) {
+                if (hand.get(j).compareTo(hand.get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            Collections.swap(hand, i, minIndex);
+        }
+    }
+    
+    // check if the hand value is over 21 and if there is a soft ace
+    // if so, change the ace value to 1 and subtract 10 from the hand value
+    // move the ace to the front of the hand
+    private void checkAce() {
+        if (handValue > 21) {
+            for (int i = hand.size() - 1; i >= 0; i--) {
+                Card c = hand.get(i);
+                if (c.getValue() == 11) {
+                    c.setValue(1);
+                    handValue -= 10;
+                    Collections.swap(hand, i, 0);
+                    break;
+                }
+            }
+        }
+    }
+    
+    // return true if the player has exactly two cards and a hand value of 21
+    public boolean hasBlackJack() {
+        return hand.size() == 2 && handValue == 21;
+    }
+    
+    // return the face up card
+    public Card getFaceUpCard() {
+        return faceUpCard;
+    }
+    
+    // set the outcome of the game
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
+    }
+    
+    // return the outcome of the game
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public boolean hit(Card dealersFaceUpCard) {
+        if (isDealer) {
+            // the dealer must hit until the hand value is 17 or more
+            return handValue < 17;
+        } else {
+
+            char[][] table = {
+                {'H','H','H','H','H','H','H','H','H','H'}, // 4
+                {'H','H','H','H','H','H','H','H','H','H'}, // 5
+                {'H','H','H','H','H','H','H','H','H','H'}, // 6
+                {'H','H','H','H','H','H','H','H','H','H'}, // 7
+                {'H','H','H','H','H','H','H','H','H','H'}, // 8
+                {'H','D','D','D','D','H','H','H','H','H'}, // 9
+                {'D','D','D','D','D','D','D','D','H','H'}, // 10
+                {'D','D','D','D','D','D','D','D','D','H'}, // 11
+                {'H','H','S','S','S','H','H','H','H','H'}, // 12
+                {'S','S','S','S','S','H','H','H','H','H'}, // 13
+                {'S','S','S','S','S','H','H','H','H','H'}, // 14
+                {'S','S','S','S','S','H','H','H','H','H'}, // 15
+                {'S','S','S','S','S','H','H','H','H','H'}, // 16
+                {'S','S','S','S','S','S','S','S','S','S'}, // 17
+                {'S','S','S','S','S','S','S','S','S','S'}, // 18
+                {'S','S','S','S','S','S','S','S','S','S'}, // 19
+                {'S','S','S','S','S','S','S','S','S','S'}, // 20
+                {'S','S','S','S','S','S','S','S','S','S'}  // 21
+            };
+            // get the row index based on the player's hand value
+            // get the row index based on the player's hand value
+            int row;
+            if (handValue < 4) {
+                row = 0; // use the first row for hand values less than 4
+            } else if (handValue > 21) {
+                row = 17; // use the last row for hand values greater than 21
+            } else {
+                row = handValue - 4; // use the corresponding row for hand values between 4 and 21
+            }
+            // get the column index based on the dealer's face up card value
+            int col = dealersFaceUpCard.getValue() - 1;
+            // get the table entry at the row and column
+            char entry = table[row][col];
+
+            // return true if the entry is H or D, false if the entry is S or P
+            return entry == 'H' || entry == 'D';
+        }
+    }
+    
+    // return the hand value
+    public int getHandValue() {
+        return handValue;
+    }
+    
+    // return a string representation of the player's hand and outcome
+    public String toString() {
+        String result = "";
+        if (isDealer) {
+            result += "Dealer  : ";
+        } else {
+            result += "Player  : ";
+        }
+        result += handValue + " " + hand;
+        if (!outcome.isEmpty()) {
+            result += " " + outcome;
+        }
+        return result;
+    }
+}
