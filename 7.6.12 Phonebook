@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+
+public class Phonebook
+{
+    private ArrayList<Contact> contacts = new ArrayList<Contact>();
+    
+    // This method takes a Contact and adds it to the list of contacts
+    public void addContact(Contact c) {
+        // Add the contact to the list
+        contacts.add(c);
+        // Sort the list by name
+        sort();
+    }
+
+    // This method sorts the contact list by name in alphabetical order A-Z
+    public void sort() {
+        // Use a simple insertion sort algorithm, as the list is already sorted except for the last element
+        for (int i = 1; i < contacts.size(); i++) {
+            // Get the current contact and its name
+            Contact current = contacts.get(i);
+            String name = current.getName();
+            // Find the correct position for the current contact in the sorted part of the list
+            int j = i - 1;
+            while (j >= 0 && name.compareTo(contacts.get(j).getName()) < 0) {
+                // Shift the contacts to the right
+                contacts.set(j + 1, contacts.get(j));
+                j--;
+            }
+            // Insert the current contact at the correct position
+            contacts.set(j + 1, current);
+        }
+    }
+
+    // This method prints each name in the phonebook to the console
+    public void printPhonebook() {
+        // Loop through the list of contacts and print their names
+        for (Contact c : contacts) {
+            System.out.println(c.getName());
+        }
+    }
+}
