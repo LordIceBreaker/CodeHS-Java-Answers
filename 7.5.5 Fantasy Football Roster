@@ -5,57 +5,59 @@ public class FantasyFootball
 {
     public static void main(String[] args)
     {
+        // Create an ArrayList of available players
         ArrayList<String> availablePlayers = new ArrayList<String>();
         addPlayers(availablePlayers);
-        
-        String thisTeam[] = new String[5];
+
+        // Create an array to store the user's team
+        String[] myTeam = new String[5];
+
+        // Create a Scanner object to get user input
         Scanner input = new Scanner(System.in);
-        
-        for (int i = 0; i < 5; i++)
-        {
-            String thisPlayer = "";
-            boolean foundOne = false;
-            while(!foundOne)
-            {
-                System.out.println("Enter name of player to add: ");
-                thisPlayer = input.nextLine();
-                //check if this is a legal / available player
-                int thisIndex = search(availablePlayers, thisPlayer);
-                if (search(availablePlayers, thisPlayer) >= 0)
-                {
-                    thisTeam[i] = thisPlayer;
-                    availablePlayers.remove(thisIndex);
-                    foundOne = true;
-                    System.out.println("Successfully added player");
-                    System.out.println();
-                }
-                else
-                {
-                    System.out.println(thisPlayer + " is not an available player.");
-                    System.out.println();
-                }
+
+        // Loop five times to get five players
+        for (int i = 0; i < 5; i++){
+            // Prompt the user to enter a player name
+            System.out.println("Enter name of player to add: ");
+            String player = input.nextLine();
+
+            // Search for the player in the available players list
+            int index = search(availablePlayers, player);
+
+            // If the player is found, add it to the user's team and remove it from the available players list
+            if (index != -1){
+                myTeam[i] = player;
+                availablePlayers.remove(index);
+                System.out.println("Successfully added player");
+                System.out.println();
             }
-            
+            // If the player is not found, print a message and decrement the loop counter
+            else{
+                System.out.println(player + " is not an available player.");
+                i--;
+            }
         }
+
+        // Print the final team roster
         System.out.println("Final Team Roster: ");
         for (int i = 0; i < 5; i++)
         {
-            System.out.println(thisTeam[i]);
+            System.out.println(myTeam[i]);
         }
     }
     
+    // A method that returns the index of a player in an ArrayList, or -1 if not found
     public static int search(ArrayList<String> array, String player)
     {
-        for (int i = 0; i < array.size(); i++)
-        {
-            if (array.get(i).equals(player))
-            {
+        for (int i = 0; i < array.size(); i++){
+            if (array.get(i).equals(player)){
                 return i;
             }
-        }
-        return -1;
+        }   
+        return -1;     
     }
     
+    // A method that adds some players to an ArrayList
     public static void addPlayers(ArrayList<String> array)
     {
         //Feel free to add names of your favorite players to this list!
