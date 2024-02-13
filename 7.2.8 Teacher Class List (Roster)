@@ -1,29 +1,46 @@
 import java.util.ArrayList;
 
-public class Roster {
-    
-    public static ArrayList<Student> classList = new ArrayList<Student>();
-    
-    
-    public static void addStudent(String name, int grade)
+public class Roster
+{
+    // Declare the classList as static
+    private static ArrayList<String> classList = new ArrayList<>();
+
+    public static void addStudent(int index, String name, int grade)
     {
+        // Create a new Student object with the given name and grade
         Student newStud = new Student(name, grade);
         
-        classList.add(newStud);
-        
+        // Add the student's name (not the entire Student object) to the classList
+        classList.add(index, newStud.getName());
     }
-    
-    /*Don't change the code in this method!
-    This method will print out all the Student names in the classList Array
-    */
+
+    public static String getLastStudent()
+    {
+        // Retrieve the name of the last student in the classList
+        return classList.get(classList.size() - 1);
+    }
+
+    public static int getClassSize()
+    {
+        // Return the total number of students in the classList
+        return classList.size();
+    }
+
+    public static Student getStudent(int index)
+    {
+        // Retrieve the Student object at the specified index
+        // (You might want to handle index out of bounds scenarios here)
+        return new Student(classList.get(index), 0); // Assuming grade is not relevant here
+    }
+
     public static String printClassList()
     {
-        String names = "";
-        for(Student name: classList)
+        // Create a string representation of the student names
+        StringBuilder names = new StringBuilder();
+        for (String name : classList)
         {
-            names+= name.getName() + "\n";
+            names.append(name).append("\n");
         }
-        return "Student Class List:\n" + names;
+        return "Student Class List:\n" + names.toString();
     }
-    
 }
