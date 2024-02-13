@@ -1,0 +1,68 @@
+import java.util.*;
+public class WordScramble
+{
+ 
+    /** Modifies wordList by replacing each word with its scrambled
+    * version, removing any words that are unchanged as a result of scrambling.
+    * @param wordList the list of words
+    * Precondition: wordList contains only non-null objects
+    * Postcondition:
+    * - all words unchanged by scrambling have been removed from wordList
+    * - each of the remaining words has been replaced by its scrambled version
+    * - the relative ordering of the entries in wordList is the same as it was
+    * before the method was called
+    */
+    public static void scrambleOrRemove(List<String> wordList){ 
+    // To Be Implemented in Part b
+    // Loop through the wordList from the end to the beginning
+    for (int i = wordList.size() - 1; i >= 0; i--) {
+        // Get the original word at the current index
+        String original = wordList.get(i);
+        // Scramble the word using the scrambleWord method
+        String scrambled = scrambleWord(original);
+        // If the scrambled word is equal to the original word, remove it from the list
+        if (scrambled.equals(original)) {
+            wordList.remove(i);
+        }
+        // Otherwise, replace the original word with the scrambled word in the list
+        else {
+            wordList.set(i, scrambled);
+        }
+    }
+}
+
+
+
+
+
+/** Scrambles a given word.
+    * @param word the word to be scrambled
+    * @return the scrambled word (possibly equal to word)
+    * Precondition: word is either an empty string or contains only uppercase letters.
+    * Postcondition: the string returned was created from word as follows:
+    * - the word was scrambled, beginning at the first letter and continuing from left to right
+    * - two consecutive letters consisting of "A" followed by a letter that was not "A" were swapped
+    * - letters were swapped at most once
+    */
+    public static String scrambleWord(String word){ 
+        int current = 0;
+        String result="";
+        while (current < word.length()-1){
+            if (word.substring(current,current+1).equals("A") 
+                    && !word.substring(current+1,current+2).equals("A")){
+                result += word.substring(current+1,current+2); 
+                result += "A";
+                current += 2;
+            }
+            else 
+            {
+                result += word.substring(current,current+1);
+                current++; 
+            }
+        }
+        if (current < word.length()){
+            result += word.substring(current); 
+        }
+        return result; 
+    }
+}
