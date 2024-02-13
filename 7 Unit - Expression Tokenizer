@@ -1,0 +1,26 @@
+public ArrayList<String> tokenizer(String expression) {
+	
+	char[] letters = expression.toCharArray();
+	    ArrayList<String> foundChars = new ArrayList<String>();
+	    String tempString = "";
+	    for (int i = 0; i < letters.length; i++){
+	        if (Character.isDigit(letters[i])){
+	            
+	            tempString = tempString.concat(String.valueOf(letters[i]));
+	            System.out.println(tempString);
+	        }
+	        else{
+	            if (!tempString.isEmpty()){
+	                foundChars.add(tempString);
+	                tempString = "";
+	            }
+	            foundChars.add(String.valueOf(letters[i]));
+	            System.out.println(foundChars);
+	        }
+	    }
+	    if (!tempString.isEmpty()){
+	        foundChars.add(tempString);
+	    }
+	    System.out.println(foundChars);
+        return foundChars;
+}
