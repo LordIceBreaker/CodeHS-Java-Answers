@@ -1,0 +1,15 @@
+public class DelimitersTester
+{
+    public static void main(String[] args)
+    {
+        // Start here!
+        String[] tokens = {"(","x + y",")","* 5" };
+        
+        Delimiters test = new Delimiters("(", ")");
+        System.out.println(test.getDelimitersList(tokens));
+
+        String[] tokens2 = {"<q>","yy","</q>","zz", "</q>" };
+        test = new Delimiters("<q>", "</q>");
+        System.out.println(test.getDelimitersList(tokens2));
+    }
+}
