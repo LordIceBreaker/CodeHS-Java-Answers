@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+
+public class DelimitersTester
+{
+    public static void main(String[] args)
+    {
+        //These are tests using the examples provided in the exercise
+        //The correct results should be true, false, false, false when printed
+        Delimiters sup = new Delimiters("<sup>", "</sup>");
+        ArrayList <String> test = new ArrayList<String>();
+        test.add("<sup>");
+        test.add("<sup>");
+        test.add("</sup>");
+        test.add("<sup>");
+        test.add("</sup>");
+        test.add("</sup>");
+        System.out.println(sup.isBalanced(test));
+        
+        
+        ArrayList <String> test2 = new ArrayList<String>();
+        test2.add("<sup>");
+        test2.add("</sup>");
+        test2.add("</sup>");
+        test2.add("<sup>");
+        System.out.println(sup.isBalanced(test2));
+        
+        ArrayList <String> test3 = new ArrayList<String>();
+        test3.add("</sup>");
+        System.out.println(sup.isBalanced(test3));
+        
+        ArrayList <String> test4 = new ArrayList<String>();
+        test4.add("<sup>");
+        test4.add("<sup>");
+        test4.add("</sup>");
+        System.out.println(sup.isBalanced(test4));
+    }
+}
