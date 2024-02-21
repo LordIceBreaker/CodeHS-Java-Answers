@@ -1,0 +1,38 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+import java.util.ArrayList;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        ArrayList<String> someArr = new ArrayList<>();
+        someArr.add("Never");
+        someArr.add("Shower");
+        someArr.add("Games");
+        someArr.add("And");
+        someArr.add("There");
+        
+        System.out.println("Array before: " + someArr);
+        wordPair(someArr);
+    }
+
+
+    public static void wordPair(ArrayList<String> arr){
+        for (int i = 1; i < arr.size(); i++){
+            if (arr.get(i - 1).length() < arr.get(i).length()){
+                arr.remove(i - 1);
+                i++;
+            }
+            else if (arr.get(i - 1).length() > arr.get(i).length()){
+                arr.remove(i);
+                i++;
+            }
+            else if (arr.get(i - 1).length() == arr.get(i).length()){
+                arr.remove(i - 1);
+                i++;
+            }
+        }
+        System.out.println("Array after: " + arr);
+    }
+}
