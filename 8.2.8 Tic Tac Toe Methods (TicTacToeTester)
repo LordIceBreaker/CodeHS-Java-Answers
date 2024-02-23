@@ -18,8 +18,5 @@ public class TicTacToeTester
         }
         System.out.println("\nAfter three turns:");
         game.printBoard();
-        
-        
-    
     }
 }
