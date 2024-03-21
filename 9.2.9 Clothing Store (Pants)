@@ -1,0 +1,12 @@
+public class Pants extends Clothing {
+    public boolean areShorts;
+
+    public Pants(String size, String color, boolean areShorts) {
+        super(size, color);
+        this.areShorts = areShorts;
+    }    
+
+    public boolean areShorts() {
+        return areShorts;
+    }   
+}
