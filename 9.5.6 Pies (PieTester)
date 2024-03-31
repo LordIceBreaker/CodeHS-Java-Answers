@@ -4,18 +4,12 @@ public class PieTester
 {
     public static void main(String[] args)
     {
-        // Start here!
-        Pie pie1 = new Pie("Rubarb", 12);
-        
-        PecanPie pie2 = new PecanPie(8, "maple");
-        
-        ApplePie pie3 = new ApplePie(6);
-        
-        Pie[] pies = {pie1, pie2, pie3};
-        
-        for (int i = 0; i < pies.length; i++)
-        {
-            System.out.println(pies[i].getSlices() + " slices " + pies[i].getType() + "pie");
-        }
+        Pie pumpkin = new PumpkinPie(6, false);
+        Pie applePie = new ApplePie(6);
+        Pie blueberry = new Pie("Blueberry", 6);
+
+        System.out.println("Pie: " + pumpkin.getType());
+        System.out.println("Pie: " + applePie.getType());
+        System.out.println("Pie: " + blueberry.getType());
     }
 }
