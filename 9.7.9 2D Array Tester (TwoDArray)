@@ -7,27 +7,24 @@ public class TwoDArray {
     }
 
     public boolean equals(Object[][] other){
+        // Check if the lengths of the outer arrays are equal
+        if (other.length != myArray.length){
+            return false;
+        }
 
-        // Add your code here
-        if (myArray.length == other.length)
-        {
-            for (int i = 0; i < myArray.length; i++)
-            {
-                if (other[i].length != myArray[i].length)
-                {
+        // Check if the lengths of the inner arrays and their elements are equal
+        for (int i = 0; i < myArray.length; i++) {
+            if (other[i].length != myArray[i].length){
+                return false;
+            }
+            for (int j = 0; j < myArray[i].length; j++) {
+                if (!myArray[i][j].equals(other[i][j])){
                     return false;
                 }
-                for (int j = 0; j < myArray[i].length; j++)
-                {
-                    if (!other[i][j].equals(myArray[i][j]))
-                    {
-                        return false;
-                    }
-                }
             }
-            return true;
         }
-        return false;
-    }
 
+        // If all checks pass, the arrays are equal
+        return true;
+    }
 }
