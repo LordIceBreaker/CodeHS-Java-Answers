@@ -6,7 +6,16 @@ public class Ball
        this.color = color;
    }
    
-    public String getColor(){
+   public String getColor(){
        return color;
+   }
+
+   public boolean equals(Object other){
+       Ball otherBall = (Ball) other;
+       return this.getColor().equals(otherBall.getColor());
+   }
+   
+   public String toString() {
+       return "Color: " + color;
    }
 }
