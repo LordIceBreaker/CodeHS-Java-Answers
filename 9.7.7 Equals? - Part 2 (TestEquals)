@@ -1,5 +1,7 @@
-public class TestEquals {
-    public static void main(String[] args) {  
+public class TestEquals
+{
+    public static void main(String[] args)
+    {
         Object obj1 = new Object();
         Object obj2 = new Object();
         Object obj3 = obj1;
