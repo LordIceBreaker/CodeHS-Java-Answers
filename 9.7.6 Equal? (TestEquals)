@@ -1,52 +1,42 @@
-public class TestEquals
-{
-    public static void main(String[] args)
-    {
+public class TestEquals {
+    public static void main(String[] args) {  
+        Object obj1 = new Object();
+        Object obj2 = new Object();
+        Object obj3 = obj1;
+        
         System.out.println("** Object **");
-        Object first = new Object();
-        Object second = first; 
-        Object third = new Object(); 
-        
-        // Print out all three objects
-        System.out.println(first);
-        System.out.println(second);
-        System.out.println(third);
-        
-        // Print a true statement using 2 objects and ==
-        System.out.println("First and Second are equal: " + (first == second));
-        
-        // Print a false statement using 2 objects and ==
-        System.out.println("First and Third are equal: " + (first == third));
-        
-        // Print a true statement using 2 objects and .equals()
-        System.out.println("First and Third are equal: " + (first.equals(second)));
-        
-        // Print a false statement using 2 objects and .equals()
-        System.out.println("First and Second are equal: " + (first.equals(third)));
-        
-        System.out.println("** Ball **");
-        
-        
-        Ball golfball = new Ball(1.5); 
-        Ball minigolf = golfball; 
-        Ball largeGolf = new Ball(1.5); 
-        
-        // Print out all three objects
-        System.out.println(golfball);
-        System.out.println(minigolf);
-        System.out.println(largeGolf);
-        
-         // Print a true statement using 2 objects and ==
-         System.out.println("Golfball and Minigolf are equal: " + (golfball == minigolf));
-        
-        // Print a false statement using 2 objects and ==
-        System.out.println("Golfball and LargeGolf are equal: " + (golfball == largeGolf));
-        
-        // Print a true statement using 2 objects and .equals()
-        System.out.println("Golfball and Minigolf are equal: " + (golfball.equals(minigolf)));
-        
-        // Print a false statement using 2 objects and .equals()
-        System.out.println("Golfball and LargeGolf are equal: " + (golfball.equals(largeGolf)));
 
+        // Print out all three objects
+        System.out.println("Object 1: " + obj1);
+        System.out.println("Object 2: " + obj2);
+        System.out.println("Object 3: " + obj3);
+
+        System.out.println();
+        
+        // Print a TRUE statement using 2 objects and ==
+        System.out.println("Is true using '==' : " + (obj1 == obj3));
+        
+        // Print a FALSE statement using 2 objects and .equals()
+        System.out.println("Is false using '.equals' : " + obj2.equals(obj3));
+        
+        System.out.println("-----------------------------------");
+       
+        System.out.println("** Ball **");        
+        Ball ball1 = new Ball("Red");
+        Ball ball2 = new Ball("Blue");
+        Ball ball3 = ball1;
+
+        // Print out all three Ball objects
+        System.out.println("Ball 1: " + ball1);
+        System.out.println("Ball 2: " + ball2);
+        System.out.println("Ball 3: " + ball3);
+
+        System.out.println();
+
+        // Print a TRUE statement using 2 Ball objects and .equals()
+        System.out.println("Is true using '.equals' : " + ball1.equals(ball3));
+        
+        // Print a FALSE statement using 2 Ball objects and .equals()
+        System.out.println("Is false using '.equals' : " + ball1.equals(ball2));
     }
 }
