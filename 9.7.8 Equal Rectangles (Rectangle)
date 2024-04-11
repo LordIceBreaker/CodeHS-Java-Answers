@@ -8,19 +8,20 @@ public class Rectangle{
         this.height = height;
     }
     
-    public boolean equals(Rectangle rectangle)
-    {
-        //return this.width == rectangle ** this.height == rectangle;
-        if (this.width == rectangle.width)
-            return true;
-        else
-            return false;
+    public double getArea() {
+        return (width * height);
     }
-    
-    public String toString()
-    {
+
+    public boolean equals(Object other) {
+        if (other instanceof Rectangle) {
+            Rectangle otherRect = (Rectangle) other;
+            return (this.width * this.height == otherRect.width * this.height);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
         return "A rectangle with a width of " + width + " and a height of " + height;
     }
-    
-   
 }
