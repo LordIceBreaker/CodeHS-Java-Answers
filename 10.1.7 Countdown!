@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Countdown {
+   public static void main(String[] args) {
+      Scanner input = new Scanner(System.in);
+
+      System.out.println("Enter starting number: ");
+      int number = input.nextInt();
+
+      String countdownString = countdown(number);
+      System.out.println(countdownString);       
+   }
+    
+   public static String countdown(int n) {
+      if (n <= 0) {
+         return "Blastoff!";
+      } else {
+         return n + " " + countdown(n - 2);
+      }
+   }
+}
