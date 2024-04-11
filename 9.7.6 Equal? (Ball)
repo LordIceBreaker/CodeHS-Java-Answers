@@ -1,12 +1,12 @@
 public class Ball
 {
-   private double diameter;
+   private String color;
    
-   public Ball(double diameter){
-       this.diameter = diameter;
+   public Ball(String color){
+       this.color = color;
    }
    
-    public double getDiameter(){
-       return diameter;
+    public String getColor(){
+       return color;
    }
 }
