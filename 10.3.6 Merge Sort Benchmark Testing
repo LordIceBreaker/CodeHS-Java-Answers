@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+
+public class SortTester {
+
+    public static void main(String[] args) {
+        int arraySize = 50000;
+
+        // Random Array
+        int[] testArray = makeRandomArray(arraySize);
+        long startTime = System.currentTimeMillis();
+        Sorter.mergeSort(testArray, testArray.length);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Random Array: " + (endTime - startTime) + " ms");
+
+        // Almost Sorted Array
+        testArray = makeAlmostSortedArray(arraySize);
+        startTime = System.currentTimeMillis();
+        Sorter.mergeSort(testArray, testArray.length);
+        endTime = System.currentTimeMillis();
+        System.out.println("Almost Sorted Array: " + (endTime - startTime) + " ms");
+
+        // Reverse Array
+        testArray = makeReverseArray(arraySize);
+        startTime = System.currentTimeMillis();
+        Sorter.mergeSort(testArray, testArray.length);
+        endTime = System.currentTimeMillis();
+        System.out.println("Reverse Array: " + (endTime - startTime) + " ms");
+    }
+
+    public static int[] makeRandomArray(int number){
+        int[] array = new int[number];
+        ArrayList<Integer> sorted = new ArrayList<Integer>(number);
+        for (int i = 0; i < number; i++){
+            sorted.add(i);
+        }
+
+        int index = 0;
+        while (sorted.size() > 0){
+            int randomIndex = (int)(Math.random()*sorted.size());
+            array[index] = sorted.remove(randomIndex);
+            index ++;
+        }
+
+        return array;
+    }
+
+    public static int[] makeReverseArray(int number)
+    {
+        int[] array = new int[number];
+        int counter = number;
+        for(int i = 0; i < number; i++)
+        {
+            array[i] = counter;
+            counter--;
+        }
+        return array;
+    }
+
+    public static int[] makeAlmostSortedArray(int number)
+    {
+        int[] array = new int[number];
+        for(int i= 0; i < number; i++)
+        {
+            array[i] = i+1;
+        }
+        int temp = array[array.length-1];
+        array[array.length-1] = array[array.length - 2];
+        array[array.length - 2] = temp;
+        return array;
+    }
+}
